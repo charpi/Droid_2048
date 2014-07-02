@@ -16,8 +16,6 @@ module GameGrid =
         List.init dim (fun _ -> List.init dim (fun _ -> 0))
 
     let newTile grid =
-        let toArrayFun = (fun (acc: int array list) x -> List.append acc [(List.toArray x)])
-        let array = List.toArray (List.fold toArrayFun [] grid)
         let rnd = new System.Random()
         let rec choose (innerRnd :System.Random) (innerArray :int array []) =
             let row = innerArray.[innerRnd.Next(1, dim)]
@@ -28,12 +26,12 @@ module GameGrid =
                 innerArray
             |_ ->
                 choose innerRnd innerArray
-
-        choose rnd array
+        grid
+        |> List.map List.toArray
+        |> List.toArray
+        |> choose rnd
+        |> Array.map Array.toList
         |> Array.toList
-        |> List.fold (fun acc x -> (Array.toList x) :: acc) []
-        |> List.rev
-
 
     let create () :Game =
         {score=0; grid = (newTile emptyGrid)}
@@ -110,3 +108,8 @@ module GameGrid =
         let sc = g.score
         let newGrid, points = extractPoint (moveGrid m gr)
         {score = sc + points; grid = (if not (isSameGrid newGrid gr) then (newTile newGrid) else newGrid)}
+
+    let toString (g: Game) =
+        g.grid
+        |> List.map (fun row -> row |> List.fold (fun acc v -> sprintf "%s %5d" acc v) "")
+        |> List.fold (fun acc row -> sprintf "%s\n%s" acc row) ""
