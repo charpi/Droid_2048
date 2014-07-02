@@ -18,11 +18,11 @@ module GameGrid =
     let newTile grid =
         let rnd = new System.Random()
         let rec choose (innerRnd :System.Random) (innerArray :int array []) =
-            let row = innerArray.[innerRnd.Next(1, dim)]
-            let col = row.[innerRnd.Next(1,dim)]
-            match col with
+            let row = innerArray.[innerRnd.Next(0, dim)]
+            let index = innerRnd.Next(0,dim)
+            match row.[index] with
             |0 ->
-                row.[innerRnd.Next(1,dim)] <- 2
+                row.[index] <- 2
                 innerArray
             |_ ->
                 choose innerRnd innerArray
