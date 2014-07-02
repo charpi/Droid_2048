@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{4925A630-B079-445d-BCD4-3A9C94FE9307}") = "Droid_2048", "Droid_2048.fsproj", "{6FC6CB91-ECB7-4744-8963-B272A5208041}"
-EndProject
-Project("{4925A630-B079-445d-BCD4-3A9C94FE9307}") = "test_lib", "test_lib\test_lib.fsproj", "{52745775-26A3-4DC6-8E3F-38249C701327}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Droid_2048", "Droid_2048.fsproj", "{6FC6CB91-ECB7-4744-8963-B272A5208041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +9,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{52745775-26A3-4DC6-8E3F-38249C701327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52745775-26A3-4DC6-8E3F-38249C701327}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52745775-26A3-4DC6-8E3F-38249C701327}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52745775-26A3-4DC6-8E3F-38249C701327}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FC6CB91-ECB7-4744-8963-B272A5208041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FC6CB91-ECB7-4744-8963-B272A5208041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FC6CB91-ECB7-4744-8963-B272A5208041}.Release|Any CPU.ActiveCfg = Release|Any CPU
