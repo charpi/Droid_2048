@@ -1,0 +1,5 @@
+/Users/charpi/ltd/charpi/code/Droid_2048/Droid_2048/test_lib/obj/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.fs
+/Users/charpi/ltd/charpi/code/Droid_2048/Droid_2048/test_lib/bin/Debug/test_lib.dll.mdb
+/Users/charpi/ltd/charpi/code/Droid_2048/Droid_2048/test_lib/bin/Debug/test_lib.dll
+/Users/charpi/ltd/charpi/code/Droid_2048/Droid_2048/test_lib/obj/Debug/test_lib.dll
+/Users/charpi/ltd/charpi/code/Droid_2048/Droid_2048/test_lib/obj/Debug/test_lib.dll.mdb
