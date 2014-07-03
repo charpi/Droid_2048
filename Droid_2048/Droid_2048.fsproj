@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.fs" />
     <Compile Include="Properties\AssemblyInfo.fs" />
+    <Compile Include="GameGrid.fsi">
+    </Compile>
     <Compile Include="GameGrid.fs">
     </Compile>
     <Compile Include="MainActivity.fs" />
