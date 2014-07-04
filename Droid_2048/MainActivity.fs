@@ -48,7 +48,7 @@ type MainActivity () =
                             ignore (ctx.ExecuteNonQuery())
                             )
 
-    let readBest = 
+    let readBest () = 
         let cmd = "SELECT [Value] from [Game] where [Key] = 'best'"
         let ctx = cnx.CreateCommand()
         ctx.CommandText <- cmd
@@ -88,7 +88,8 @@ type MainActivity () =
         let refreshGame () = 
             score.Text <- sprintf "%d" (game.score)
             board.Text <- GameGrid.toString game
-              
+            best.Text <- readBest ()
+
         button.Click.Add (fun args -> 
             game <- GameGrid.create()
             if (int best.Text) < (int score.Text) then writeBest score.Text else ()
@@ -114,5 +115,4 @@ type MainActivity () =
                     () // skip
         )
 
-        board.Text <- databasePath
-        best.Text <- readBest
+        refreshGame ()
