@@ -23,10 +23,10 @@ namespace Droid_2048
     #nowarn "51" // address-of operator can occur in the code
     #nowarn "1183" // unused 'this' reference
     
-    exception ReturnExceptiona5248fcf79ea4f009d85e11e14ed6cf0 of obj
-    exception ReturnNoneExceptiona5248fcf79ea4f009d85e11e14ed6cf0
+    exception ReturnException1b7f222ce9494278a5b74243921673da of obj
+    exception ReturnNoneException1b7f222ce9494278a5b74243921673da
     [<AutoOpen>]
-    module FuncConvertFinalOverloada5248fcf79ea4f009d85e11e14ed6cf0 =
+    module FuncConvertFinalOverload1b7f222ce9494278a5b74243921673da =
       // This extension member adds to the FuncConvert type and is the last resort member in the method overloading rules. 
       type global.Microsoft.FSharp.Core.FuncConvert with
           /// A utility function to convert function values from tupled to curried form
@@ -65,14 +65,20 @@ namespace Droid_2048
         
         (* partial *)Resource_Id () =
             static do Android.Runtime.ResourceIdManager.UpdateIdValues()
-            // aapt resource value: 0x7f050002
-            static member board = 2131034114
-            
             // aapt resource value: 0x7f050001
-            static member reset = 2131034113
+            static member best = 2131034113
+            
+            // aapt resource value: 0x7f050004
+            static member board = 2131034116
+            
+            // aapt resource value: 0x7f050002
+            static member reset = 2131034114
             
             // aapt resource value: 0x7f050000
             static member score = 2131034112
+            
+            // aapt resource value: 0x7f050003
+            static member test = 2131034115
             (* Member of type 'CodeTypeConstructor' is not supported by the CodeDOM provider and was omitted *)
 
 
@@ -91,10 +97,13 @@ namespace Droid_2048
         
         (* partial *)Resource_String () =
             static do Android.Runtime.ResourceIdManager.UpdateIdValues()
-            // aapt resource value: 0x7f040001
-            static member app_name = 2130968577
+            // aapt resource value: 0x7f040002
+            static member app_name = 2130968578
             
             // aapt resource value: 0x7f040000
             static member reset = 2130968576
+            
+            // aapt resource value: 0x7f040001
+            static member test = 2130968577
             (* Member of type 'CodeTypeConstructor' is not supported by the CodeDOM provider and was omitted *)
 

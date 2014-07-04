@@ -8,6 +8,8 @@ open Android.OS
 open Android.Runtime
 open Android.Views
 open Android.Widget
+open System.Data
+open Mono.Data.Sqlite
 
 open GameGrid
 
@@ -18,6 +20,48 @@ type MainActivity () =
     let mutable game = GameGrid.create()
     let mutable originX = 0.0
     let mutable originY = 0.0
+
+    let databasePath = 
+        System.IO.Path.Combine ((Environment.GetFolderPath Environment.SpecialFolder.Personal),"droid_2048.db")
+    
+    let firstBoot =
+        if (System.IO.File.Exists databasePath) then
+            false
+        else
+            Mono.Data.Sqlite.SqliteConnection.CreateFile databasePath
+            true
+
+    let cnx = 
+        let tmp = new Mono.Data.Sqlite.SqliteConnection("Data Source=" + databasePath)
+        tmp.Open()
+        tmp
+
+    let initdb = 
+        let commands = [ "CREATE TABLE [Game] (Key ntext PRIMARY KEY, Value ntext);"; "INSERT INTO [Game] ([Key], [Value]) VALUES ('best', '0')"]
+        if (firstBoot = false) then 
+            ()
+        else
+            commands
+            |> List.iter (fun cmd ->
+                            let ctx = cnx.CreateCommand()
+                            ctx.CommandText <- cmd
+                            ignore (ctx.ExecuteNonQuery())
+                            )
+
+    let readBest = 
+        let cmd = "SELECT [Value] from [Game] where [Key] = 'best'"
+        let ctx = cnx.CreateCommand()
+        ctx.CommandText <- cmd
+        let reader = ctx.ExecuteReader()
+        ignore (reader.Read())
+        reader.GetString(0)
+
+    let writeBest value =
+        let cmd = "UPDATE [Game] set Value = '" + value + "' WHERE Key = 'best'"
+        let ctx = cnx.CreateCommand()
+        ctx.CommandText <- cmd
+        ignore(ctx.ExecuteNonQuery())
+
 
     let play (dx :float) (dy :float) =
         let move = if (abs dx) > (abs dy) then 
@@ -38,15 +82,22 @@ type MainActivity () =
         let button = this.FindViewById<Button>(Resource_Id.reset)
         let score = this.FindViewById<TextView>(Resource_Id.score)
         let board = this.FindViewById<TextView>(Resource_Id.board)
+        let best = this.FindViewById<TextView>(Resource_Id.best)
+        let test = this.FindViewById<TextView>(Resource_Id.test)
+
         let refreshGame () = 
             score.Text <- sprintf "%d" (game.score)
             board.Text <- GameGrid.toString game
-  
+              
         button.Click.Add (fun args -> 
             game <- GameGrid.create()
+            if (int best.Text) < (int score.Text) then writeBest score.Text else ()
             refreshGame ()
         )
 
+        test.Click.Add (fun args ->
+           ()
+        )
         board.Touch.Add (fun (args :View.TouchEventArgs) ->
              match args.Event.Action with
                 | MotionEventActions.Down ->
@@ -60,5 +111,8 @@ type MainActivity () =
                     game <- (play deltaX deltaY)
                     refreshGame ()
                 | _ ->
-                    () // skipe
+                    () // skip
         )
+
+        board.Text <- databasePath
+        best.Text <- readBest
