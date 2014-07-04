@@ -64,12 +64,16 @@ type MainActivity () =
 
 
     let play (dx :float) (dy :float) =
-        let move = if (abs dx) > (abs dy) then 
-                        (if (dx > 0.0) then GameGrid.Left else GameGrid.Right)
-                    else
-                        (if (dy > 0.0) then GameGrid.Up else GameGrid.Down)
-       
-        GameGrid.move game move
+        let absX = abs dx
+        let absY = abs dy
+        if (absX + absY) > 50. then
+                let move = if absX > absY then 
+                            (if (dx > 0.0) then GameGrid.Left else GameGrid.Right)
+                            else
+                            (if (dy > 0.0) then GameGrid.Up else GameGrid.Down)
+                GameGrid.move game move
+        else
+            game
 
     override this.OnCreate (bundle) =
 
